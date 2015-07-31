@@ -1,0 +1,626 @@
+<html>
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic|Montserrat:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link type="text/css" rel="stylesheet" href="airbnb-font.css"/>
+		<link type="text/css" rel="stylesheet" href="social.css"/>
+		
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="carousel.js"></script>
+		
+		<link type="text/css" rel="stylesheet" href="progressjs.css"/>
+		<script type="text/javascript" src="progress.js"></script>
+		
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+		<script type="text/javascript" src="d3.hive.js"></script>
+		<script type="text/javascript" src="textures.js"></script>
+		<script type="text/javascript" src="math.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLnJhjUETjEUnu3aPbVd_-QUpERzhUvms"></script>
+		<script type="text/javascript" src="richmarker.js"></script>
+		<script type="text/javascript" src="infobox.js"></script>
+		<script type="text/javascript" src="markerClusterer.js"></script>
+		<script type="text/javascript" src="maps.js"></script>
+		<script type="text/javascript" src="jquery.svg.js"></script>
+		
+		<link type="text/css" rel="stylesheet" href="airbnb.plot.css"/>
+		<script type="text/javascript" id="src-code" src="airbnb.plot.logo.js"></script>
+		<script type="text/javascript" id="src-code" src="airbnb.plot.js"></script>
+		
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/xregexp/2.0.0/xregexp-min.js"></script>
+		<script type="text/javascript" src="shCore.js"></script>
+		<script type="text/javascript" src="shBrushPhp.js"></script>
+		<link rel="stylesheet" href="shCoreEclipse.css">
+		<style>
+			footer a{
+				  color: black;
+				  opacity: .1;
+			}
+			
+			footer a:hover{
+				  color: black;
+				  opacity: 1;
+				  text-decoration: none;
+			}
+			
+			footer .resources a{
+				color: #000000;
+				opacity: .5;
+			}
+			
+			footer .resources a:hover{
+				opacity: .8;
+			}
+					
+			.section{
+				padding-top: 50px;
+			}
+			
+			body{
+				font-family: Circular, 'Montserrat', 'Lato', 'Ubuntu';
+			}
+			
+			#carousel-example-generic .carousel-inner .item img{
+				height: 500px;
+			}
+			#carousel-example-generic .carousel-inner .item .carousel-caption{
+				color: #000;
+				opacity: .7;
+			}
+			
+			#carousel-example-generic .carousel-inner .item .carousel-caption img{
+				height: 300px;
+			}
+			
+			.carousel-control.left {
+				  /* background-image: -webkit-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%); */
+				  /*background-image: -o-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);*/
+				  /* background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.5)),to(rgba(0,0,0,.0001))); */
+				  /* background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%); */
+				  background-image: none;
+			}
+			.carousel-control.right {
+			  right: 0;
+			  left: auto;
+			  /*background-image: -webkit-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);*/
+			  /*background-image: -o-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);*/
+			  /*background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.0001)),to(rgba(0,0,0,.5)));*/
+			  /*background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);*/
+			  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);*/
+			  /*background-repeat: repeat-x;*/
+			  background-image: none;
+	  		}
+	  		.carousel-indicators li {
+		  		  border: 1px solid #000;
+	  		}
+	  		
+	  		.gm-style > div:nth-child(2){
+		  		display: none;
+	  		}
+	  		
+	  		.gm-style > div.gmnoprint{
+		  		display: none;
+	  		}
+	  		
+	  		.gm-style > div:nth-child(9){
+		  		display: block !important;
+	  		}
+	  		
+	  		#plot-helpers{
+	  			margin-top: -300px;
+	  			margin-bottom: 8px;
+	  		}
+	  		#plot-helpers .helper{
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radius: 5px;
+				-moz-box-shadow: 0px 0px 5px #999;
+				-webkit-box-shadow: 0px 0px 5px #999;
+				box-shadow: 0px 0px 5px #999;
+				padding: 15px;
+				margin: 10px;
+				min-height: 268px;
+				color: #fd5c63;
+				background-color: rgba(255, 255, 255, 0.25);
+	  		}
+	  		#plot-helpers .helper:hover{
+		  		-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				border-radius: 5px;
+				-moz-box-shadow: 0px 0px 5px #fd5c63;
+				-webkit-box-shadow: 0px 0px 5px #fd5c63;
+				box-shadow: 0px 0px 5px #fd5c63;
+				background-color: rgba(253, 91, 100, 0.5);
+				color: white;
+	  		}
+	  		
+	  		#plot-helpers .helper .title{
+		  		font-size: 1.5em;
+		  		text-transform: uppercase;
+		  		text-align: center;
+	  		}
+	  		#plot-helpers .helper hr{
+		  		margin: 0px;
+		  		height: 1px;
+		  		background-color: #fd5c63;
+		  		border-top: none;
+	  		}
+	  		
+	  		#plot-helpers .helper #selected_close:hover{
+		  		color: white !important;
+		  		opacity: .5;
+			}
+			
+			.type_link{
+				width: 60px;
+				height: 60px;
+				opacity: .35;
+				margin-bottom: 10px;
+				margin-top: 5px;
+			}
+			.type_link:hover{
+				width: 60px;
+				height: 60px;
+			}
+			.type_node{
+				width: 60px;
+				height: 60px;
+				opacity: .35;
+				border: none;
+				margin-bottom: 10px;
+				margin-top: 5px;
+			}
+			.type_node:hover{
+				width: 60px;
+				height: 60px;
+			}
+			.color_palette:hover{
+				color: black !important;
+				font-weight: bolder;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#" style="margin-top: -5px"><img src="airbnb_blank.png"></img></a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="active"><a href="#">The project</a></li>
+	            <li><a href="#introduction">Introduction</a></li>
+	            <li><a href="#hiveplot">Hiveplot</a></li>
+	            <li><a href="#code">The code</a></li>
+	            <li><a href="#contact">Contact</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+	    <div class="container" style="margin-top: 52px">
+	      <div class="starter-template">
+		      <a href="http://www.airbnb.com"><img src="airbnb.svg"></div></a>
+		      <div style="  margin-top: -50px;margin-bottom: 20px;margin-left: 133px; color: #fd5c63;">The world leader in travel rentals.</div>
+	        <!--<h1>Airbnb</h1>-->
+	        <!--<p class="lead">The world leader in travel rentals.</p>-->
+	      </div>
+	      <div style="background-color: rgba(255,0,0,.06);">
+		      <div id="device_alert" class="container"></div>
+	      </div>
+	    </div>
+	    <div id="temporal">
+		    <div class="progressjs-progress progressjs-theme-blue">
+			    <div class="progressjs-inner">
+				    <div id="progressjs-centered">
+				    </div>
+			    </div>
+			</div>
+			<script type="text/javascript">
+				progressJs().setOptions({overlayMode: true, theme: 'AirbnbOverlay'}).start().autoIncrease(4, 500);
+				if(window.attachEvent) {
+					window.attachEvent('onload', function(){ progressJs().end(); });
+			    } else {
+			        if(window.onload) {
+			            var curronload = window.onload;
+			            var newonload = function() {
+			                curronload();
+			                progressJs().end();
+			            };
+			            window.onload = newonload;
+			        } else {
+			            window.onload = function(){ progressJs().end(); };
+			        }
+			    }
+			</script>
+	    </div>
+	    <div id="plot"></div>
+	    <div id="plot-helpers">
+		    <div class="row">
+			    <div class="col-xs-6 col-sm-offset-2 col-sm-4 col-md-offset-3 col-md-3 col-lg-offset-3 col-lg-3">
+				    <div id="element_selected"class="helper">
+					    <i id="selected_close" class="fa fa-times-circle-o" style="float: right;color: #fd5c63;font-size: 1.5em;margin-top: -7px;margin-right: -4px;"></i>
+					    <div class="title">Selected</div>
+					    <div>
+						    <div style="text-align: center">
+							    <h1 style="margin-top: -6px;margin-bottom: -1px;">LINK</h1>
+							    <hr/>
+							    <img class="type_link" src="link-i.svg"></img>
+					    	</div>
+					    	<p>SOURCE: </p>
+					    	<p>TARGET: </p>
+					    </div>
+				    </div>
+			    </div>
+			    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+				    <div id="element_hovered"class="helper">
+					    <div class="title">HOVERED</div>
+					    <div>
+						    <div style="text-align: center">
+							    <h1 style="margin-top: -6px;margin-bottom: -1px;">NULL</h1>
+							    <hr/>
+					    	</div>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+	    </div>
+	    <div id='introduction' class="container section">
+		    <h1>Introduction</h1>
+		    <h3>Airbnb User Pathways Challenge</h3>
+		    <p>At Airbnb, guests search for homes around the world to stay in on their travels. We use data from the site to find ways in which we can help guests find listings, and better design the site user experience.</p>
+			<p>The work of the Data Science team at Airbnb is challenging. We are a two sided marketplace, with heavy seasonality and variation by cities across the globe. Discerning signal from noise and extracting the right stories from the vast amount of data we get is complicated by many of these factors.</p>
+			<p>We’re always looking for ways to improve our methods for addressing this challenge, so we want to share some of the work we do with the broader data science community. This pathways visualization problem is an opportunity for you to explore real behavioral data and help us understand its trends more clearly.</p>
+			</p>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<div style="border-color: #ddd;border-width: 1px;border-radius: 4px 4px 0 0;   border-style: solid; padding: 45px 15px 15px; margin-bottom: 10px;">
+					<p>
+						<b>The data</b>
+						Here are some basics on the dataset:
+						<ul>
+							<li>Number of records in data: 7756</li>
+							<li>Date span of the data: ['2014-05-05', '2015-04-23']</li>
+							<li>Number of unique users in data: 630</li>
+							<li>Number of unique sessions in data: 7756</li>
+							<li>Percent of sessions with search: 15.9%</li>
+							<li>Percent of sessions with sent message: 16.5%</li>
+							<li>Percent of sessions with booking request: 1.9%</li>
+						</ul>
+					</p>
+				</div>	
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<p>Your task is to come up with an interactive visualization that can do what no static graph can. You are on a mission to use this data and tell a story of user interactions with the Airbnb platform: switching devices, spending time on the platform, doing different actions, and effecting user outcomes.</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+					</ol>
+					
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img src="blank.gif" alt="session duration"></img>
+							<div class="carousel-caption">
+								<h3>Frequency session duration</h3>
+								<img src="session_duration.png" alt="session duration"></img>
+								<p>The data is a sample representing user sessions in the past year in a US city. User sessions -- the time that users spend on our product -- can be long! Indeed, choosing the ideal next place you want to stay at can take time.</p>
+							</div>
+						</div>
+						<div class="item">
+							<img src="blank.gif" alt="device use"></img>
+							<div class="carousel-caption">
+								<h3>Device & agent session frequency</h3>
+								<img src="device_use.png" alt="device use"></img>
+								<p>The devices and apps employed by the users to stay connected to Airbnb are many.</p>
+							</div>
+						</div>
+						<div class="item">
+							<img src="blank.gif" alt="session number duration"></img>
+							<div class="carousel-caption">
+								<h3>User session number related to the duration</h3>
+								<img src="session_number_duration.png" alt="session number duration"></img>
+								<p>But what are the users on all those devices doing during the sessions? The data provides information on 3 important actions: searching, sending messages, and requesting a booking.</p>
+								<p>As you can see from the graph above, some users access Airbnb up to 700 times in the tracked time span.</p>
+							</div>
+						</div>
+						<div class="item">
+							<img src="blank.gif" alt="avg session duration num days online"></img>
+							<div class="carousel-caption">
+								<h3>Number of days online compared to the session duration</h3>
+								<img src="avg_session_duration_num_days_online.png" alt="avg session duration num days online"></img>
+								<p>What's actually interesting is to see how user actions translate into user outcomes. Below is a high level summary of users' average session durations, days online, and achieved user outcomes</p>
+								<p>Inside each point on the graph are many sessions and days the corresponding user interacted with the platform.</p>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					    <span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					    <span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div style="border-color: #ddd;border-width: 1px;border-radius: 4px 4px 0 0;   border-style: solid; padding: 45px 15px 15px; margin-bottom: 10px;">
+					<b>The challenge</b><br/>
+					<p>We see a few tracks to the challenge. You are free to define yours. The ultimate goal is to build an interactive visualization that helps tell a compelling and crisp story of user behavior on Airbnb.</p>
+					<ul>
+						<li>The time aspect of user interaction with Airbnb. How do the time spent on user sessions, and the intermediate actions taken by the user on his or her journey, relate to user outcomes? Is there seasonality to how users interact with the platform? Any favorite times in the day? Are there any user types defined by when and for how long they use the platform?</li>
+						<li>Devices and apps used to access the platform and their impact on user outcomes. Do users who use a few devices and apps to access the platform exhibit different patterns than those who use one or two? What is the dynamic of switching from one device/app to the next, how does it relate to user actions and outcomes?</li>
+						<li>Your track. Find your own way of looking at the data, and share it with the world!</li>
+					</ul>
+				</div>
+			</div>
+		    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<div style="border-color: #ddd;border-width: 1px;border-radius: 4px 4px 0 0;   border-style: solid; padding: 45px 15px 15px; margin-bottom: 10px;">
+					<b>The scoring</b><br/>
+					<p>We will be evaluating your entry along 3 dimensions on a 10 point scale each. In order to compete for the win, you need to score at least 1 point on each dimension:</p>
+					<ul>
+						<li><b>Methods</b> (30%). How rigorous/ appropriate are the data analysis methods applied in the submission</li>
+						<li><b>Design/ Usability</b> (40%). How visually appealing/ usable is the submission</li>
+						<li><b>Informativeness</b> (30%). How informative is the submission towards addressing one or more challenge tracks</li>
+					</ul>
+				</div>
+		    </div>
+		    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<div style="border-color: #ddd;border-width: 1px;border-radius: 4px 4px 0 0;   border-style: solid; padding: 45px 15px 15px; margin-bottom: 10px;">
+					<b>The reward</b><br/>
+					<ul>
+						<li>All entries are open source. Your work will be displayed under your Databits profile for everyone to use and learn from. Of course, you will be able to edit/ update/ publish/ unpublish your work at will</li>
+						<li>Challenge winner gets $1000 in cash from the Airbnb Data Science team</li>
+						<li>Top 3 winning entries get Airbnb memorabilia (T-shirts, mugs)</li>
+					</ul>
+				</div>
+		    </div>
+		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div style="border-color: #ddd;border-width: 1px;border-radius: 4px 4px 0 0;   border-style: solid; padding: 45px 15px 15px; margin-bottom: 10px;">
+					<b>The files</b><br/>
+					<ul>
+						<li><a href="airbnb_session_data.txt">airbnb_session_data.txt</a>. A delimiter separated data file that uses | as delimiter. Can be read with d3.dsv in case using D3</li>
+						<li><a href="http://databits.io/static_content/challenges/airbnb-user-pathways-challenge/data_dictionary.rtf">data_dictionary.rtf</a></li>
+					</ul>
+				</div>
+		    </div>
+	    </div>
+	    <div id="hiveplot" class="container section">
+		    <h1>Hiveplot</h1>
+		    <h2>What?</h2>
+		    <p>The <b><a href="http://www.hiveplot.net/">hive plot</a></b> is a rational visualization method for drawing networks. Nodes are mapped to and positioned on radially distributed linear axes — this mapping is based on network structural properties. Edges are drawn as curved links. Simple and interpretable.</p>
+			<p>The purpose of the <b><a href="http://www.hiveplot.net/">hive plot</a></b> is to establish a new baseline for visualization of large networks — a method that is both general and tunable and useful as a starting point in visually exploring network structure.</p>
+			<h2>Why?</h2>
+			<p>When the challenge bases became public I start thinking the way to integrate all the requirements in one plot. I had worked before with <b><a href="http://www.hiveplot.net/">hive plot</a></b> visualizations as a way to integrate multiple complex values in only one unique graph. The airbnb logo suggests me the form of a triangle and i realize that the answer was inside.</p>
+			<h2>How?</h2>
+			<p>The 2013 rebranding commission was offered to <a href="https://www.wearedesignstudio.com/">WeAreDesignStudio</a> company. They conducted an in-depth immersion process that involved four agency members visiting 13 cities, across four continents. They stayed with 18 hosts and recording every aspect of their stay. They also interviewed more than 120 employees and placed half of our project team at Airbnb’s San Francisco HQ for 3 months. I only have to absorb their study.</p>
+		</div>
+		    <img src="belo.gif" style="width:100%"></img>
+		<div class="container"
+			<p>Apparently no one checked for inadvertent sexual connotations. The mark looks like an abstraction of ALL the private parts.</p>
+
+			<p>They can’t pretend to know what went into designing the Bélo, but the end result is surprisingly tone deaf. This seems like a case of a still young startup that wants to assign meaning to its stratospherically successful brand so badly that it has quickly gotten in over its head. The story that Airbnb tells in order to contextualize its new identity seems similarly hamfisted and overly self-important to the point of satire. Airbnb is successfully disrupting the tremendous and staid lodging industry, but it’s hard to imagine this particular combination of pomposity and message mismanagement from say Holiday Inn.</p>
+			<p>Airbnb uses a font called "LL Circular" (see <a href="http://lineto.com/The+Fonts/Font+Categories/Text+Fonts/Circular">lineto.com</a>).It is a geometric Sans Serif font family with currently 8 cuts. It was designed by Laurenz Brunner from 2005 to 2013. LL Circular is a new take on a classic genre, first explored by Paul Rennerʼs Futura (1927-28). In the process of developing the font, the purely geometric approach gave way to more complex formal conception, resulting in a geometric Sans Serif marrying purity with warmth. Striking a balance between functionality, conceptual rigour, skilled workmanship and measured idiosyncrasy, LL Circular is a friendly sans serif text font with unmistakeable character yet universal appeal.</p>
+			<p>Airbnb only use one brand color: <span style="color: #fd5c63">#fd5c63</span> (see <a href="http://brandcolors.net/#brand-32">brandcolors.net</a>) which uses <span style="color: red">253R</span>, <span style="color: green">92G</span>, <span style="color: blue">99B</span>. I know I shall use more than ten colors so I decided to elaborate an HSL 12 color palette with the brand color as starting. To get this palette I use <a href="http://colorizer.org/nextversion/">colorizer.org</a>.</p>
+			<p>The result was the following color palette:</p>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="row">
+					<div style="text-align: center;background-color: #5cfdf6; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#5cfdf6	
+					</div>
+					<div style="text-align: center;background-color: #5cb4fd; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#5cb4fd	
+					</div>
+					<div style="text-align: center;background-color: #5c63fd; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#5c63fd	
+					</div>
+					<div style="text-align: center;background-color: #a55cfd; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#a55cfd	
+					</div>
+					<div style="text-align: center;background-color: #f65cfd; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#f65cfd	
+					</div>
+					<div style="text-align: center;background-color: #fd5cb4; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#fd5cb4	
+					</div>
+					<div style="text-align: center;background-color: #fd5c63; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#fd5c63	
+					</div>
+					<div style="text-align: center;background-color: #fda55c; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#fda55c	
+					</div>
+					<div style="text-align: center;background-color: #fdf65c; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#fdf65c	
+					</div>
+					<div style="text-align: center;background-color: #b4fd5c; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#b4fd5c	
+					</div>
+					<div style="text-align: center;background-color: #63fd5c; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#63fd5c	
+					</div>
+					<div style="text-align: center;background-color: #5cfda5; color: white;" class="col-xs-4 col-sm-3 col-md-2 col-lg-1 color_palette">
+						#5cfda5	
+					</div>
+				</div>
+			</div>
+			<p>First I divide the space in 5 axis:
+				<ul>
+					<li>Users</li>
+					<li>Avg session time</li>
+					<li>Session duration</li>
+					<li>Agents + devices</li>
+					<li>Actions(search, message, book)</li>
+				</ul>
+			</p>
+			<p>When I try to understand the first results I had prepared I recognise inmediately the user avg time session was directly related with actions but sometimes there were some users that do not correspond as expected. When I try to identify the patternom I saw that this specific user group uses the page with no logic, which is translated as a high absolute deviation time session. Thats why I consider to add two more axis:
+				<ul>
+					<li>Absolute deviation session time</li>
+					<li>Standard deviation session time</li>
+				</ul>
+			</p>
+			<img style="width: 100%;" src="mindnode.png"></img>
+			<h2>Where?</h2>
+			<p>Blabla databits.io bla bla bla.</p>
+			<h2>When?</h2>
+			<p>bla bla bla.</p>
+	    </div>
+	    <div id="carousel-case-study" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-case-study" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-case-study" data-slide-to="1"></li>
+				<li data-target="#carousel-case-study" data-slide-to="2"></li>
+				<li data-target="#carousel-case-study" data-slide-to="3"></li>
+				<li data-target="#carousel-case-study" data-slide-to="4"></li>
+				<li data-target="#carousel-case-study" data-slide-to="5"></li>
+			</ol>
+			
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+					<img src="case_study0.jpg" style="width:100%; height:500px;-webkit-filter: blur(1.7px) brightness(1.03) grayscale(1);filter: blur(1.7px) brightness(1.03) grayscale(1);-webkit-transform: translate3d(0, 0, 0);" alt="session duration"></img>
+					<div class="carousel-caption" style="top: 170px;">
+						<h1 style="font-size: 5em;">Listen</h1>
+						<p>Requirements, Facilities, Scope, Definition, ...</p>
+					</div>
+				</div>
+				<div class="item">
+					<img src="case_study1.jpg" style="width:100%; height:500px;-webkit-filter: blur(1.7px) brightness(1.03) grayscale(1);filter: blur(1.7px) brightness(1.03) grayscale(1);-webkit-transform: translate3d(0, 0, 0);" alt="session duration"></img>
+					<div class="carousel-caption" style="top: 170px;">
+						<h1 style="font-size: 5em;">Analisys</h1>
+						<p>Brand, Brainstorming, Case study, Functionalities, ...</p>
+					</div>
+				</div>
+				<div class="item">
+					<img src="case_study2.jpg" style="width:100%; height:500px;-webkit-filter: blur(1.7px) brightness(1.03) grayscale(1);filter: blur(1.7px) brightness(1.03) grayscale(1);-webkit-transform: translate3d(0, 0, 0);" alt="session duration"></img>
+					<div class="carousel-caption" style="top: 170px;">
+						<h1 style="font-size: 5em;">Plan</h1>
+						<p>Timetable, Milestones, Gantt, ...</p>
+					</div>
+				</div>
+				<div class="item">
+					<img src="case_study3.jpg" style="width:100%; height:500px;-webkit-filter: blur(1.7px) brightness(1.03) grayscale(1);filter: blur(1.7px) brightness(1.03) grayscale(1);-webkit-transform: translate3d(0, 0, 0);" alt="session duration"></img>
+					<div class="carousel-caption" style="top: 170px;">
+						<h1 style="font-size: 5em;">Design</h1>
+						<p>Mockup, Concept, Prototype, Wireframe</p>
+					</div>
+				</div>
+				<div class="item">
+					<img src="case_study4.jpg" style="width:100%; height:500px;-webkit-filter: blur(1.7px) brightness(1.03) grayscale(1);filter: blur(1.7px) brightness(1.03) grayscale(1);-webkit-transform: translate3d(0, 0, 0);" alt="session duration"></img>
+					<div class="carousel-caption" style="top: 170px;">
+						<h1 style="font-size: 5em;">Develop</h1>
+						<p>Code, Code, Code, Debug, Obstinate, Code ... :)</p>
+					</div>
+				</div>
+				<div class="item">
+					<img src="case_study5.jpg" style="width:100%; height:500px;-webkit-filter: blur(1.7px) brightness(1.03) grayscale(1);filter: blur(1.7px) brightness(1.03) grayscale(1);-webkit-transform: translate3d(0, 0, 0);" alt="session duration"></img>
+					<div class="carousel-caption" style="top: 170px;">
+						<h1 style="font-size: 5em;">Review</h1>
+						<p>Testing, Faq, Manual, ...</p>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-case-study" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#carousel-case-study" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			</a>
+		</div>
+	    <div id="code" class="container section">
+		    <h1>The code</h1>
+		    <pre class="syntaxhighlighter brush: js;"></pre>
+	    </div>
+	    <div id='contact' class="container section"></div>
+		<div id="contact-map" style="height: 500px; margin-top: -5px;"></div>
+		<footer>
+			<div class="container"style="text-align: center; font-size: 25px;">
+				<a class="fa fa-google google" href="mailto:andresin87@gmail.com"></a>
+				<a class="fa fa-facebook-official facebook" href="https://www.facebook.com/andresin87"></a>
+				<a class="fa fa-instagram instagram" href="https://www.instagram.com/andresin87"></a>
+				<a class="fa fa-skype skype" href="skype:andresin87?call"></a>
+				<a class="fa fa-linkedin-square linkedin" href="https://es.linkedin.com/pub/andr%C3%A9s-lucas-enciso/31/461/174"></a>
+				<a class="fa fa-twitter twitter" href="https://www.twitter.com/andresin87"></a>
+				<a class="fa fa-pinterest pinterest" href="https://es.pinterest.com/andresin87/"></a>
+				<a class="fa fa-google-plus google_plus" href="https://plus.google.com/+AndresLucas87/"></a>
+				<a class="fa fa-github github" href="https://github.com/andresin87"></a>
+				<a class="fa fa-phone-square" href="tel:+34934311469"></a>
+				<a class="fa fa-mobile" href="tel:+34644448761"></a>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<div class="resources" style="text-align: left; font-size: 10px; margin-left: 10px; margin-bottom: 10px;">
+					<div style="color:#000000">I've used the resources:<br/>
+						<a href="http://d3js.org/">d3.js</a>,
+						<a href="d3.hive.js">d3.hive.js</a>,
+						<a href="http://getbootstrap.com/">Bootstrap</a>,
+						<a href="hhttp://fortawesome.github.io/Font-Awesome/">Font Awesome</a>,
+						<a href="http://jquery.com/">jQuery</a>
+						<a href="http://usablica.github.io/progress.js/">Progress.js</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<div style="text-align: right; font-size: 10px; margin-right: 10px; margin-bottom: 10px;">
+					<div style="">Andrés Lucas Enciso ® – July 2015. All rights reserved.</div>
+					<div>
+						<img src="cc10.png" width="20" height="20"></img>
+						<img src="cc6.png" width="15" height="15"></img>
+						<img src="cc7.png" width="15" height="15"></img>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script type="text/javascript">
+			$('.carousel').carousel()
+			/*var src = $("#src-code").attr('src');
+			$( document ).ready(function() {
+				$.get( src, function() {
+				})
+				  .done(function(data) {
+					 	//var t = $('#code .syntaxhighlighter').append(data);
+					 	//SyntaxHighlighter.all();
+				  })
+				  .fail(function() {
+				    alert( "error" );
+				  });
+			});*/
+		</script>
+		<script type="text/javascript">
+			$( document ).ready(function() {
+				function isMobile() {
+				  try{ document.createEvent("TouchEvent"); return true; }
+				  catch(e){ return false; }
+				}
+				if(isMobile()){
+					$('#device_alert').append('This web dataviz is supposed to be used in Desktop Devices due to mouseover events. If you are on some mobile device, please, check again later with your computer.')
+				}
+			});
+			
+		</script>
+	</body>
+</html>

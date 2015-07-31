@@ -1,0 +1,28 @@
+@font-face {
+    font-family: Airglyphs;
+    src: url("airglyphs.eot");
+    src: url("airglyphs-ie8.eot?#") format("eot"), url("airglyphs.woff") format("woff"), url("airglyphs.ttf") format("truetype"), url("airglyphs.svg") format("svg");
+    font-weight: normal;
+    font-style: normal
+}
+@font-face {
+    font-family: Circular;
+    src: url("Circular_Air-Book.eot");
+    src: url("Circular_Air-Book.eot?#") format("eot"), url("Circular_Air-Book.woff") format("woff"), url("Circular_Air-Book.svg") format("svg");
+    font-weight: normal;
+    font-style: normal
+}
+@font-face {
+    font-family: Circular;
+    src: url("Circular_Air-Book_Italic.eot");
+    src: url("Circular_Air-Book_Italic.eot?#") format("eot"), url("Circular_Air-Book_Italic.woff") format("woff"), url("Circular_Air-Book_Italic.svg") format("svg");
+    font-weight: normal;
+    font-style: italic
+}
+@font-face {
+    font-family: Circular;
+    src: url("Circular_Air-Bold.eot");
+    src: url("Circular_Air-Bold.eot?#") format("eot"), url("Circular_Air-Bold.woff") format("woff"), url("Circular_Air-Bold.svg") format("svg");
+    font-weight: 700;
+    font-style: normal
+}

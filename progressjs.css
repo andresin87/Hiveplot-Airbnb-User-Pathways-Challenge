@@ -1,0 +1,198 @@
+.progressjs-inner {
+    width: 0;
+}
+.progressjs-progress {
+    z-index: 9999999;
+}
+
+/* blue theme, like iOS 7 progress bar */
+.progressjs-theme-blue .progressjs-inner {
+    height: 2px;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    background-color: #fd5c63;
+}
+.progressjs-theme-blue.progressjs-end {
+    -webkit-transition: opacity 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+}
+.progressjs-theme-blue .progressjs-percent {
+    display: none;
+}
+
+/* blue theme with overlay layer, no percent bar */
+.progressjs-theme-AirbnbOverlay {
+    background-color: white;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+.progressjs-theme-AirbnbOverlay .progressjs-inner {
+    height: 100%;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    background-color: #fd5c63;
+}
+.progressjs-theme-AirbnbOverlay.progressjs-end {
+    opacity: 0 !important;
+}
+.progressjs-theme-AirbnbOverlay .progressjs-percent {
+    display: inline;
+    font-size: 6em;
+}
+
+/* blue theme with overlay layer, no percent bar */
+.progressjs-theme-AirbnbOverlay {
+    background-color: white;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+.progressjs-theme-AirbnbOverlay .progressjs-inner {
+    height: 100%;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    background-color: #fd5c63;
+}
+.progressjs-theme-AirbnbOverlay.progressjs-end {
+    opacity: 0 !important;
+}
+
+.progressjs-theme-AirbnbOverlay .progressjs-centered {
+    display: inline;
+    position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-shadow: 0 1px 2px rgba(0,0,0,.6);
+	font-size: 2em;
+	color: white;
+	text-align: center;
+}
+
+.progressjs-theme-AirbnbOverlay .progressjs-airbnb-logo > img{
+	-webkit-filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.4));
+	filter: url("data:image/svg+xml;utf8,<svg height='0' xmlns='http://www.w3.org/2000/svg'…e/><feMergeNode in='SourceGraphic'/></feMerge></filter></svg>#drop-shadow");
+	-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+	filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+/* Blue theme with border radius and overlay layer */
+.progressjs-theme-AirbnbOverlayRadius {
+    background-color: white;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    border-radius: 5px;
+}
+.progressjs-theme-AirbnbOverlayRadius .progressjs-inner {
+    height: 100%;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    background-color: #fd5c63;
+    border-radius: 5px;
+}
+.progressjs-theme-AirbnbOverlayRadius.progressjs-end {
+    opacity: 0 !important;
+}
+.progressjs-theme-AirbnbOverlayRadius .progressjs-percent {
+    display: none;
+}
+
+/* Blue theme with border radius and overlay layer */
+.progressjs-theme-AirbnbOverlayRadiusHalfOpacity {
+    background-color: white;
+    opacity: 0.5;
+   -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    border-radius: 5px;
+}
+.progressjs-theme-AirbnbOverlayRadiusHalfOpacity .progressjs-inner {
+    height: 100%;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    background-color: #fd5c63;
+    border-radius: 5px;
+}
+.progressjs-theme-AirbnbOverlayRadiusHalfOpacity.progressjs-end {
+    opacity: 0 !important;
+}
+.progressjs-theme-AirbnbOverlayRadiusHalfOpacity .progressjs-percent {
+    display: none;
+}
+
+/* Blue theme with border radius, overlay layer and percent bar */
+.progressjs-theme-AirbnbOverlayRadiusWithPercentBar {
+    background-color: white;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    border-radius: 5px;
+}
+.progressjs-theme-AirbnbOverlayRadiusWithPercentBar .progressjs-inner {
+    height: 100%;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    background-color: #fd5c63;
+    border-radius: 5px;
+}
+.progressjs-theme-AirbnbOverlayRadiusWithPercentBar.progressjs-end {
+    opacity: 0 !important;
+}
+.progressjs-theme-AirbnbOverlayRadiusWithPercentBar .progressjs-percent {
+    width: 70px;
+    text-align: center;
+    height: 40px;
+    position: absolute;
+    right: 50%;
+    margin-right: -35px;
+    top: 50%;
+    margin-top: -20px;
+    font-size: 30px;
+    opacity: .5;
+}
+
+.progressjs-theme-blackRadiusInputs {
+    height: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.progressjs-theme-blackRadiusInputs .progressjs-inner {
+    height: 2px;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    transition: all 1s ease-out;
+    background-color: #34495e;
+}
+.progressjs-theme-blackRadiusInputs.progressjs-end {
+    -webkit-transition: opacity 0.2s ease-out;
+    -moz-transition: opacity 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+    opacity: 0;
+}
+.progressjs-theme-blackRadiusInputs .progressjs-percent {
+    display: none;
+}
